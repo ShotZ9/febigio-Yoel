@@ -1,113 +1,112 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import './EditStory.css';
 
 const EditStory = () => {
-  const { id } = useParams();
+  const { state } = useLocation(); // Mengambil data story dari navigasi sebelumnya
   const navigate = useNavigate();
-  const [story, setStory] = useState({
-    title: '',
-    author: '',
-    synopsis: '',
-    category: '',
-    status: 'Draft',
-    tags: [],
+  const storyData = state?.story || {}; // Jika tidak ada data, gunakan objek kosong
+
+  const [formData, setFormData] = useState({
+    title: storyData.title || '',
+    author: storyData.author || '',
+    category: storyData.category || '',
+    keywords: storyData.keywords?.join(', ') || '',
+    synopsis: storyData.synopsis || '',
   });
 
-  useEffect(() => {
-    // Fetch the story details based on the `id` for editing
-    // For demo, using hardcoded data
-    const fetchedStory = {
-      id,
-      title: 'Example Story Title',
-      author: 'Example Author',
-      synopsis: 'This is a synopsis of the story.',
-      category: 'Fantasy',
-      tags: ['example', 'tag'],
-      status: 'Publish',
-    };
-    setStory(fetchedStory);
-  }, [id]);
-
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setStory({
-      ...story,
-      [name]: value,
-    });
-  };
-
-  const handleTagChange = (e) => {
-    const { value } = e.target;
-    setStory({
-      ...story,
-      tags: value.split(','),
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSave = () => {
-    // Save the edited story (e.g., send data to an API)
-    console.log('Edited Story:', story);
-    navigate('/story-list');
+    // Logika untuk menyimpan perubahan
+    console.log('Story Updated:', formData);
+    navigate('/story-list'); // Kembali ke daftar cerita
+  };
+
+  const handleCancel = () => {
+    navigate('/story-list'); // Membatalkan dan kembali ke daftar cerita
   };
 
   return (
     <div className="edit-story-container">
-      <h2>Edit Story</h2>
-      <form>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={story.title}
-          onChange={handleInputChange}
-        />
+      <header className="edit-story-header">
+        <h1>Edit Story</h1>
+      </header>
+      <form className="edit-story-form">
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder="Enter story title"
+          />
+        </div>
 
-        <label>Author:</label>
-        <input
-          type="text"
-          name="author"
-          value={story.author}
-          onChange={handleInputChange}
-        />
+        <div className="form-group">
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+            placeholder="Enter author name"
+          />
+        </div>
 
-        <label>Synopsis:</label>
-        <textarea
-          name="synopsis"
-          value={story.synopsis}
-          onChange={handleInputChange}
-        ></textarea>
+        <div className="form-group">
+          <label htmlFor="category">Category</label>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          >
+            <option value="">Select Category</option>
+            <option value="Teen Fiction">Teen Fiction</option>
+            <option value="Romance">Romance</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Non Fiction">Non Fiction</option>
+          </select>
+        </div>
 
-        <label>Category:</label>
-        <select
-          name="category"
-          value={story.category}
-          onChange={handleInputChange}
-        >
-          <option value="">Select Category</option>
-          <option value="Teen Fiction">Teen Fiction</option>
-          <option value="Romance">Romance</option>
-          <option value="Fantasy">Fantasy</option>
-          <option value="Non Fiction">Non Fiction</option>
-        </select>
+        <div className="form-group">
+          <label htmlFor="keywords">Keywords</label>
+          <input
+            type="text"
+            id="keywords"
+            name="keywords"
+            value={formData.keywords}
+            onChange={handleChange}
+            placeholder="Enter keywords separated by commas"
+          />
+        </div>
 
-        <label>Tags:</label>
-        <input
-          type="text"
-          placeholder="Enter tags separated by commas"
-          onChange={handleTagChange}
-        />
+        <div className="form-group">
+          <label htmlFor="synopsis">Synopsis</label>
+          <textarea
+            id="synopsis"
+            name="synopsis"
+            value={formData.synopsis}
+            onChange={handleChange}
+            placeholder="Write a brief synopsis"
+          />
+        </div>
 
-        <label>Status:</label>
-        <select
-          name="status"
-          value={story.status}
-          onChange={handleInputChange}
-        >
-          <option value="Draft">Draft</option>
-          <option value="Publish">Publish</option>
-        </select>
-
-        <button type="button" onClick={handleSave}>Save Story</button>
+        <div className="form-actions">
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            Cancel
+          </button>
+          <button type="button" className="save-button" onClick={handleSave}>
+            Save
+          </button>
+        </div>
       </form>
     </div>
   );

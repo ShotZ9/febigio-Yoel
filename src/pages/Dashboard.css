@@ -1,43 +1,74 @@
-body {
-    margin: 0;
+.dashboard-container {
+    padding: 20px;
     font-family: Arial, sans-serif;
 }
 
-.dashboard-container {
-    padding: 20px;
-}
-
 .dashboard-header {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .dashboard-content {
-    margin-top: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .dashboard-stats {
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .stat-box {
-    background-color: #f2f2f2;
-    padding: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
     border-radius: 8px;
     text-align: center;
-    width: 150px;
+    width: 30%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .stat-box h3 {
-    margin: 0;
-    font-size: 18px;
+    margin: 0 0 10px;
+    font-size: 16px;
 }
 
 .stat-box p {
-    margin: 10px 0 0 0;
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.story-list {
+    margin-top: 20px;
+}
+
+.story-list h2 {
+    margin-bottom: 10px;
+}
+
+.dashboard-story-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.dashboard-story-table th,
+.dashboard-story-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.dashboard-story-table th {
+    background-color: #f5f5f5;
+}
+
+.dashboard-story-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.dashboard-story-table tr:hover {
+    background-color: #f1f1f1;
 }

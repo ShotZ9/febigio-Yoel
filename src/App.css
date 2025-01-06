@@ -1,3 +1,5 @@
+/* App.css */
+
 .App {
   display: flex;
   font-family: Arial, sans-serif;
@@ -6,8 +8,8 @@
 .sidebar {
   width: 200px;
   background-color: #f4f4f4;
-  padding: 20px;
-  height: 100vh;
+  padding: 20px 0;
+  height: 100%;
   position: fixed;
 }
 
@@ -29,7 +31,7 @@
 .navigation ul li {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 24px 16px;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -38,6 +40,7 @@
   text-decoration: none;
   color: gray;
   font-weight: bold;
+  display: block;
   width: 100%;
 }
 
@@ -56,16 +59,17 @@
   width: 100%;
 }
 
-.navigation .nav-link:hover {
-  color: inherit;
-}
-
 .navigation .icon {
   margin-right: 10px;
 }
 
+.navigation .nav-item.active .icon,
+.navigation .nav-item.active .nav-link {
+  color: white;
+}
+
 .content {
-  margin-left: 220px;
+  margin-left: 180px;
   padding: 20px;
   flex: 1;
 }

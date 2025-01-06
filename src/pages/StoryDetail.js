@@ -1,43 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { initialStories } from '../data';
+import "./StoryDetail.css"
 
 const StoryDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [story, setStory] = useState(null);
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const story = initialStories.find((story) => story.id === parseInt(id));
 
-  useEffect(() => {
-    // Fetch the story details based on the `id`
-    // For demo, using hardcoded data
-    const fetchedStory = {
-      id,
-      title: 'Example Story Title',
-      author: 'Example Author',
-      synopsis: 'This is a synopsis of the story.',
-      category: 'Fantasy',
-      tags: ['example', 'tag'],
-      status: 'Publish',
+    if (!story) {
+        return <div>Story not found</div>;
+    }
+    
+    const handleBack = () => {
+        navigate(-1);
     };
-    setStory(fetchedStory);
-  }, [id]);
 
-  const handleEdit = () => {
-    navigate(`/story-list/edit/${id}`);
-  };
-
-  if (!story) return <div>Loading...</div>;
-
-  return (
-    <div className="story-detail-container">
-      <h2>{story.title}</h2>
-      <p><strong>Author:</strong> {story.author}</p>
-      <p><strong>Synopsis:</strong> {story.synopsis}</p>
-      <p><strong>Category:</strong> {story.category}</p>
-      <p><strong>Status:</strong> {story.status}</p>
-      <p><strong>Tags:</strong> {story.tags.join(', ')}</p>
-      <button onClick={handleEdit}>Edit Story</button>
-    </div>
-  );
+    return (
+        <div className="story-detail-container">
+            <button className="back-button" onClick={handleBack}>
+                <i className="fa fa-arrow-left"></i> Back
+            </button>
+            <h1>{story.title}</h1>
+            <p><strong>Author:</strong> {story.author}</p>
+            <p><strong>Category:</strong> {story.category}</p>
+            <p><strong>Status:</strong> {story.status}</p>
+            <p><strong>Keywords:</strong> {story.keywords.join(', ')}</p>
+            <p><strong>Synopsis:</strong> {story.synopsis || 'No synopsis available'}</p>
+        </div>
+    );
 };
 
 export default StoryDetail;

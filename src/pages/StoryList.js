@@ -158,6 +158,7 @@ const StoryList = () => {
             <th>Category</th>
             <th>Keyword</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -178,11 +179,25 @@ const StoryList = () => {
                 <td>
                   <span className={`status-badge ${story.status.toLowerCase()}`}>{story.status}</span>
                 </td>
+                <td className="dot-dot">
+                  <button
+                    className="dot-button"
+                    onClick={() => navigate(`/story-detail/${story.id}`)}
+                  >
+                    Detail
+                  </button>
+                  <button
+                    className="dot-button edit-button"
+                    onClick={() => navigate(`/edit-story/${story.id}`, { state: { story } })}
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="6" className="no-data">
+              <td colSpan="7" className="no-data">
                 No stories found.
               </td>
             </tr>

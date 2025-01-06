@@ -26,6 +26,24 @@ const MainApp = () => {
     setActiveLink(location.pathname);
   }, [location]);
 
+  const isActiveLink = (path) => {
+    const storyPaths = [
+      '/story-list',
+      '/story-detail/:id',
+      '/edit-story/:id',
+      '/add-story',
+      '/add-chapter'
+    ];
+
+    if (path === '/') {
+      return location.pathname === path ? 'active' : '';
+    }
+
+    return storyPaths.some((storyPath) => location.pathname.includes(storyPath.replace(':id', '')))
+      ? 'active'
+      : '';
+  };
+
   return (
     <div className="App">
       <div className="sidebar">
@@ -34,7 +52,7 @@ const MainApp = () => {
           <ul>
             <Link
               to="/"
-              className={`nav-item ${activeLink === '/' ? 'active' : ''}`}
+              className={`nav-item ${isActiveLink('/')}`}
               onClick={() => setActiveLink('/')}>
               <li className="nav-link">
                 <FaTh className="icon" />
@@ -44,7 +62,7 @@ const MainApp = () => {
 
             <Link
               to="/story-list"
-              className={`nav-item ${activeLink === '/story-list' ? 'active' : ''}`}
+              className={`nav-item ${isActiveLink('/story-list')}`}
               onClick={() => setActiveLink('/story-list')}>
               <li className="nav-link">
                 <FaBook className="icon" />
@@ -58,10 +76,10 @@ const MainApp = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/story-list" element={<StoryList />} />
+          <Route path="/story-detail/:id" element={<StoryDetail />} />
+          <Route path="/edit-story/:id" element={<EditStory />} />
           <Route path="/add-story" element={<AddStory />} />
           <Route path="/add-chapter" element={<AddChapter />} />
-          <Route path="/story-list/:id" element={<StoryDetail />} />
-          <Route path="/story-list/edit/:id" element={<EditStory />} />
         </Routes>
       </div>
     </div>

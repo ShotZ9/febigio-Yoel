@@ -1,0 +1,60 @@
+.edit-story-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-story-header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .edit-story-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .edit-story-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .edit-story-form input,
+  .edit-story-form select,
+  .edit-story-form textarea {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .edit-story-form textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  .edit-story-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .edit-story-form .cancel-button,
+  .edit-story-form .save-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-story-form .cancel-button {
+    background-color: #ccc;
+    color: #fff;
+  }
+  
+  
